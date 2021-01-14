@@ -87,16 +87,3 @@ export default {
   components: {AppComments, AppTitle, AppSubTitle, AppAvatar, AppText }
 }
 </script>
-
-<style>
-  .avatar {
-    display: flex;
-    justify-content: center;
-  }
-
-  .avatar img {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-  }
-</style>
