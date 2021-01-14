@@ -1,6 +1,6 @@
 <template>
   <div class="container column">
-    <form class="card card-w30" @submit.prevent="AddElement(type, value)">
+    <form class="card card-w30" @submit.prevent="addElement(type, value)">
       <div class="form-control">
         <label for="type">Тип блока</label>
         <select id="type" v-model="type">
@@ -74,7 +74,7 @@ export default {
       this.comments = data
       this.loading = false
     },
-    AddElement(type, value) {
+    addElement(type, value) {
       this.result.push({type: type, value: value})
       //добавляем в правую часть и пишем в базу type, value
     },
