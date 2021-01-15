@@ -18,7 +18,7 @@
           <textarea id="value" rows="3" v-model="typeValue"></textarea>
         </div>
 
-        <button type="submit" class="btn primary">Добавить</button>
+        <button type="submit" :disabled = "disabledSubmit" class="btn primary">Добавить</button>
       </form>
 
       <div class="card card-w70">
@@ -144,6 +144,9 @@ export default {
       set: function (newValue) {
         this.type === 'avatar' ? this.defaultAvatarValue = newValue : this.value = newValue
       }
+    },
+    disabledSubmit() {
+      return this.type === 'avatar' ? this.defaultAvatarValue.length === 0 : this.value.length < 4
     }
   },
   components: {AppComments, AppTitle, AppSubTitle, AppAvatar, AppText, AppLoader, AppAlert }
