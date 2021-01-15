@@ -91,6 +91,7 @@ export default {
 
       type === 'avatar' ? this.result.push({id: firebaseData.name, type: type, value: this.defaultAvatarValue}) : this.result.push({id: firebaseData.name, type: type, value: value})
       this.value = ''
+      this.type = 'title'
     },
     async loadElements() {
       try {
