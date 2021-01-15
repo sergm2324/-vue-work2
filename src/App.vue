@@ -13,24 +13,15 @@
 
       <div class="form-control">
         <label for="value">Значение</label>
-        <textarea id="value" rows="3" v-model="value"></textarea>
+        <textarea id="value" rows="3" v-model="typeValue"></textarea>
       </div>
 
       <button type="submit" class="btn primary">Добавить</button>
     </form>
 
     <div class="card card-w70">
-<!--      <h1>Резюме Nickname</h1>-->
-<!--      <div class="avatar">-->
-<!--        <img src="https://cdn.dribbble.com/users/5592443/screenshots/14279501/drbl_pop_r_m_rick_4x.png">-->
-<!--      </div>-->
-<!--      <h2>Опыт работы</h2>-->
-<!--      <p>-->
-<!--        главный герой американского мультсериала «Рик и Морти», гениальный учёный, изобретатель, атеист (хотя в некоторых сериях он даже молится Богу, однако, каждый раз после чудесного спасения ссылается на удачу и вновь отвергает его существование), алкоголик, социопат, дедушка Морти. На момент начала третьего сезона ему 70 лет[1]. Рик боится пиратов, а его главной слабостью является некий - "Санчезиум". Исходя из того, что существует неограниченное количество вселенных, существует неограниченное количество Риков, герой сериала предположительно принадлежит к измерению С-137. В серии комикcов Рик относится к измерению C-132, а в игре «Pocket Mortys» — к измерению C-123[2]. Прототипом Рика Санчеза является Эмметт Браун, герой кинотрилогии «Назад в будущее»[3].-->
-<!--      </p>-->
-<!--      <h3>Добавьте первый блок, чтобы увидеть результат</h3>-->
       <span v-for = "(block, idx) in result" :key="idx" v-if = "result.length !==0">
-        <component :is="nameComponent(block.type)"></component>
+        <component :is="nameComponent(block.type)" v-bind="{ value: block.value }"></component>
       </span>
       <h3 v-else>Добавьте первый блок, чтобы увидеть результат</h3>
     </div>
@@ -59,6 +50,7 @@ export default {
       comments: [],
       type: 'title',
       value: '',
+      defaultAvatarValue: 'https://cdn.dribbble.com/users/5592443/screenshots/14279501/drbl_pop_r_m_rick_4x.png',
       result: [],
       names: [
         { type: 'title', component: 'AppTitle' },
@@ -76,7 +68,8 @@ export default {
       this.loading = false
     },
     addElement(type, value) {
-      this.result.push({type: type, value: value})
+      type === 'avatar' ? this.result.push({type: type, value: this.defaultAvatarValue}) : this.result.push({type: type, value: value})
+      this.value = ''
       //добавляем в правую часть и пишем в базу type, value
     },
     nameComponent(type) {
@@ -84,6 +77,16 @@ export default {
     }
   },
   computed: {
+    typeValue: {
+      // getter
+      get: function () {
+        return (this.type === 'avatar' ? this.defaultAvatarValue : this.value)
+      },
+      // setter
+      set: function (newValue) {
+        this.type === 'avatar' ? this.defaultAvatarValue = newValue : this.value = newValue
+      }
+    }
   },
   components: {AppComments, AppTitle, AppSubTitle, AppAvatar, AppText, AppLoader }
 }

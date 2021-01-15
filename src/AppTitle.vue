@@ -1,5 +1,5 @@
 <template>
- <h1>Резюме Nickname</h1>
+ <h1>{{value}}</h1>
 </template>
 
 <script>
