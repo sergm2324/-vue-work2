@@ -39,7 +39,7 @@
     <p v-if="!loading && comments.length === 0">
       <button class="btn primary" @click="fetchComments">Загрузить комментарии</button>
     </p>
-    <div class="loader" v-if="loading"></div>
+    <app-loader v-if="loading"></app-loader>
     <app-comments :comments = 'comments'></app-comments>
   </div>
 </template>
@@ -50,6 +50,7 @@ import AppTitle from '@/AppTitle'
 import AppSubTitle from '@/AppSubTitle'
 import AppAvatar from '@/AppAvatar'
 import AppText from '@/AppText'
+import AppLoader from '@/AppLoader'
 import axios from 'axios'
 export default {
   data() {
@@ -84,6 +85,6 @@ export default {
   },
   computed: {
   },
-  components: {AppComments, AppTitle, AppSubTitle, AppAvatar, AppText }
+  components: {AppComments, AppTitle, AppSubTitle, AppAvatar, AppText, AppLoader }
 }
 </script>
